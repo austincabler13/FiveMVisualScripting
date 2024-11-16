@@ -1,0 +1,76 @@
+{
+  "name": "fivem-visual-scripting",
+  "displayName": "FiveM Visual Scripting",
+  "description": "A FiveM Visual Scripting Tool",
+  "version": "0.0.1",
+  "publisher": "FiveM Visual Scripting",
+  "engines": {
+    "vscode": "^1.95.0"
+  },
+  "categories": [
+    "Programming Languages",
+    "Other"
+
+  ],
+  "activationEvents": [],
+  "icon": "images/icon.png",
+  "keybindings": [
+    {
+        "command": "fiveMVisualScripting.openUI",
+        "key": "ctrl+shift+f",
+        "when": "editorTextFocus"
+    }
+],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "commands": [
+    {
+        "command": "fiveMVisualScripting.openUI",
+        "title": "Open FiveM Visual Scripting"
+    }
+    ]
+  },
+          "configuration": {
+            "type": "object",
+            "title": "FiveM Visual Scripting Settings",
+            "properties": {
+                "fiveMVisualScripting.theme": {
+                    "type": "string",
+                    "default": "light",
+                    "enum": ["light", "dark", "contrast"],
+                    "description": "Theme for the FiveM Visual Scripting extension."
+                },
+                "fiveMVisualScripting.textSize": {
+                    "type": "string",
+                    "default": "16px",
+                    "enum": ["16px", "18px", "20px"],
+                    "description": "Text size for the FiveM Visual Scripting extension."
+                }
+            }
+        },
+  "scripts": {
+    "vscode:prepublish": "npm run package",
+    "compile": "webpack",
+    "watch": "webpack --watch",
+    "package": "webpack --mode production --devtool hidden-source-map",
+    "compile-tests": "tsc -p . --outDir out",
+    "watch-tests": "tsc -p . -w --outDir out",
+    "pretest": "npm run compile-tests && npm run compile && npm run lint",
+    "lint": "eslint src",
+    "test": "vscode-test"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.95.0",
+    "@types/mocha": "^10.0.9",
+    "@types/node": "20.x",
+    "@typescript-eslint/eslint-plugin": "^8.10.0",
+    "@typescript-eslint/parser": "^8.7.0",
+    "eslint": "^9.13.0",
+    "typescript": "^5.6.3",
+    "ts-loader": "^9.5.1",
+    "webpack": "^5.95.0",
+    "webpack-cli": "^5.1.4",
+    "@vscode/test-cli": "^0.0.10",
+    "@vscode/test-electron": "^2.4.1"
+  }
+}

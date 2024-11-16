@@ -13,7 +13,7 @@ Citizen.CreateThread(function()
     while true do
         Citizen.Wait(0)
         -- Use cached playerPed
-        if IsPedInAnyVehicle(playerPed, false) then
+        if playerPed and IsPedInAnyVehicle(playerPed, false) then
             -- Do something
         end
     end

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Blockly Visual Scripting</title>
+    <script src="https://unpkg.com/blockly/blockly.min.js" defer></script>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background-color: #f4f4f4;
+      }
+      h1 {
+        margin-top: 20px;
+      }
+      #blocklyDiv {
+        height: 480px;
+        width: 90%;
+        margin: 20px 0;
+        border: 1px solid #ccc;
+        background-color: #fff;
+      }
+      #generatedCode {
+        width: 90%;
+        height: 200px;
+        margin: 20px 0;
+        padding: 10px;
+        border: 1px solid #ccc;
+        background-color: #fff;
+        resize: none;
+      }
+      button {
+        padding: 10px 20px;
+        font-size: 16px;
+        cursor: pointer;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        transition: background-color 0.3s;
+      }
+      button:hover {
+        background-color: #0056b3;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Visual Scripting Tool</h1>
+    <div id="blocklyDiv"></div>
+    <xml id="toolbox" style="display: none">
+      <category name="Logic">
+        <block type="controls_if"></block>
+        <block type="logic_compare"></block>
+        <block type="logic_operation"></block>
+        <block type="logic_boolean"></block>
+      </category>
+      <category name="Loops">
+        <block type="controls_repeat_ext"></block>
+        <block type="controls_whileUntil"></block>
+      </category>
+      <category name="Math">
+        <block type="math_number"></block>
+        <block type="math_arithmetic"></block>
+      </category>
+      <!-- Add more blocks as needed -->
+    </xml>
+    <button id="generateCodeBtn">Generate Code</button>
+    <h2>Generated Code:</h2>
+    <textarea id="generatedCode" readonly></textarea>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const workspace = Blockly.inject("blocklyDiv", {
+          toolbox: document.getElementById("toolbox"),
+        });
+
+        document.getElementById("generateCodeBtn").addEventListener("click", () => {
+          const code = Blockly.JavaScript.workspaceToCode(workspace);
+          document.getElementById("generatedCode").value = code;
+          console.log(code);
+          // Optionally, send code to server or save it
+        });
+      });
+    </script>
+  </body>
+</html>
