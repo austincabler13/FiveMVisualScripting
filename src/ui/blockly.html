@@ -1,0 +1,55 @@
+<!-- ui/blockly.html -->
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Blockly Visual Scripting</title>
+    <script src="https://unpkg.com/blockly/blockly.min.js"></script>
+    <style>
+      #blocklyDiv {
+        height: 480px;
+        width: 100%;
+      }
+      #generatedCode {
+        width: 100%;
+        height: 200px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Visual Scripting Tool</h1>
+    <div id="blocklyDiv"></div>
+    <xml id="toolbox" style="display: none">
+      <category name="Logic">
+        <block type="controls_if"></block>
+        <block type="logic_compare"></block>
+        <block type="logic_operation"></block>
+        <block type="logic_boolean"></block>
+      </category>
+      <category name="Loops">
+        <block type="controls_repeat_ext"></block>
+        <block type="controls_whileUntil"></block>
+      </category>
+      <category name="Math">
+        <block type="math_number"></block>
+        <block type="math_arithmetic"></block>
+      </category>
+      <!-- Add more blocks as needed -->
+    </xml>
+    <button onclick="generateCode()">Generate Code</button>
+    <h2>Generated Code:</h2>
+    <textarea id="generatedCode" readonly></textarea>
+    <script>
+      const workspace = Blockly.inject("blocklyDiv", {
+        toolbox: document.getElementById("toolbox"),
+      });
+
+      function generateCode() {
+        const code = Blockly.JavaScript.workspaceToCode(workspace);
+        document.getElementById("generatedCode").value = code;
+        console.log(code);
+        // Optionally, send code to server or save it
+      }
+    </script>
+  </body>
+</html>

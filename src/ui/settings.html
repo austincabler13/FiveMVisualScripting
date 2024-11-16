@@ -1,0 +1,69 @@
+<!-- ui/settings.html -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Settings</title>
+    <link id="themeStylesheet" rel="stylesheet" href="themes/light.css" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- Include Navbar -->
+    <div id="navbar"></div>
+    <script>
+      fetch("components/navbar.html")
+        .then((response) => response.text())
+        .then((html) => (document.getElementById("navbar").innerHTML = html));
+    </script>
+
+    <div class="settings">
+      <h1>Settings</h1>
+      <label for="themeSelect">Theme:</label>
+      <select id="themeSelect" onchange="switchTheme(this.value)">
+        <option value="light">Light</option>
+        <option value="dark">Dark</option>
+      </select>
+
+      <br /><br />
+
+      <label for="textSize">Text Size:</label>
+      <select id="textSize" onchange="changeTextSize(this.value)">
+        <option value="16px">Default</option>
+        <option value="18px">Large</option>
+        <option value="20px">Extra Large</option>
+      </select>
+
+      <br /><br />
+
+      <input type="text" id="profileName" placeholder="Profile Name" />
+      <button
+        onclick="saveProfile(document.getElementById('profileName').value)">
+        Save Profile
+      </button>
+
+      <br /><br />
+
+      <label for="profileList">Load Profile:</label>
+      <select id="profileList" onchange="loadProfile(this.value)">
+        <option value="">Select Profile</option>
+        <!-- Profiles will be populated here -->
+      </select>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+      // Load saved settings on page load
+      window.onload = function () {
+        const savedTheme = localStorage.getItem("theme") || "light";
+        document.getElementById("themeSelect").value = savedTheme;
+        switchTheme(savedTheme);
+
+        const savedSize = localStorage.getItem("textSize") || "16px";
+        document.getElementById("textSize").value = savedSize;
+        changeTextSize(savedSize);
+
+        updateProfileList();
+      };
+    </script>
+  </body>
+</html>

@@ -1,0 +1,36 @@
+<!-- ui/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Simple Menu</title>
+    <!-- Default Theme -->
+    <link id="themeStylesheet" rel="stylesheet" href="themes/light.css" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- Include Navbar -->
+    <div id="navbar"></div>
+    <script>
+      fetch("components/navbar.html")
+        .then((response) => response.text())
+        .then((html) => (document.getElementById("navbar").innerHTML = html));
+    </script>
+
+    <div class="menu">
+      <h1>Main Menu</h1>
+      <button onclick="startGame()">Start Game</button>
+      <button onclick="openSettings()">Settings</button>
+      <button onclick="openHelp()">Help</button>
+      <button onclick="startListening()">Voice Command</button>
+    </div>
+
+    <div id="tutorialMessage"></div>
+    <button onclick="showNextTutorialStep()">Next</button>
+
+    <div id="memoryUsage"></div>
+
+    <script src="script.js"></script>
+    <script src="tutorial.js"></script>
+  </body>
+</html>
